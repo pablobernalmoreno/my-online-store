@@ -1,15 +1,18 @@
 import {
   AppBar,
-  Button,
   Grid,
   IconButton,
   Menu,
   MenuItem,
+  Switch,
   Typography,
 } from "@material-ui/core";
 import { styled } from "@mui/system";
 import MenuIcon from "@material-ui/icons/Menu";
 import PersonIcon from "@material-ui/icons/Person";
+import Brightness5Icon from "@material-ui/icons/Brightness5";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
+
 import React, { useRef, useState } from "react";
 import SearchBar from "../searchbar/SearchBar";
 
@@ -37,10 +40,15 @@ const MyGrid = styled(Grid)`
 const Navbar = () => {
   const menuAnchor = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleMenuClick = (e) => {
     e.preventDefault();
     setMenuOpen(true);
+  };
+
+  const handleDarkMode = () => {
+    setDarkMode(!darkMode);
   };
 
   return (
@@ -54,10 +62,8 @@ const Navbar = () => {
         <MyGrid item xs={5}>
           <MyTypography variant="h1">Find your games!</MyTypography>
         </MyGrid>
-        <MyGrid item xs={3}>
+        <MyGrid item xd={5}>
           <SearchBar />
-        </MyGrid>
-        <MyGrid item xd={2}>
           <MyIconButton ref={menuAnchor} onClick={handleMenuClick}>
             <PersonIcon />
           </MyIconButton>
@@ -65,10 +71,14 @@ const Navbar = () => {
             anchorEl={menuAnchor.current}
             open={menuOpen}
             onClose={() => setMenuOpen(false)}
+            onClick={handleDarkMode}
           >
             <MenuItem>Profile</MenuItem>
             <MenuItem>My account</MenuItem>
-            <MenuItem>Logout</MenuItem>
+            <MenuItem>
+              {darkMode ? <Brightness2Icon /> : <Brightness5Icon />}
+              <Switch checked={darkMode} />
+            </MenuItem>
           </Menu>
         </MyGrid>
       </MyNavbar>
