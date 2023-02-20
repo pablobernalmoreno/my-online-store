@@ -14,7 +14,8 @@ import PersonIcon from "@material-ui/icons/Person";
 import Brightness5Icon from "@material-ui/icons/Brightness5";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import SearchBar from "../searchbar/SearchBar";
-
+import { useDispatch, useSelector } from "react-redux";
+import { changeDarkTheme } from "../../redux/actions/actions";
 
 const MyNavbar = styled(AppBar)`
   display: flex;
@@ -41,6 +42,8 @@ const Navbar = () => {
   const menuAnchor = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
+  const dispatch = useDispatch();
 
   const handleMenuClick = (e) => {
     e.preventDefault();
@@ -49,7 +52,10 @@ const Navbar = () => {
 
   const handleDarkMode = () => {
     setDarkMode(!darkMode);
+    dispatch(changeDarkTheme(!darkMode));
   };
+
+  console.log(isDark);
 
   return (
     <MyGrid container spacing={3}>
@@ -71,7 +77,7 @@ const Navbar = () => {
             anchorEl={menuAnchor.current}
             open={menuOpen}
             onClose={() => setMenuOpen(false)}
-            >
+          >
             <MenuItem>Profile</MenuItem>
             <MenuItem>My account</MenuItem>
             <MenuItem onClick={handleDarkMode}>
