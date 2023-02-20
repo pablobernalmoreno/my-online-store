@@ -1,3 +1,4 @@
+import React, { useRef, useState } from "react";
 import {
   AppBar,
   Grid,
@@ -12,9 +13,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import PersonIcon from "@material-ui/icons/Person";
 import Brightness5Icon from "@material-ui/icons/Brightness5";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
-
-import React, { useRef, useState } from "react";
 import SearchBar from "../searchbar/SearchBar";
+
 
 const MyNavbar = styled(AppBar)`
   display: flex;
@@ -71,11 +71,10 @@ const Navbar = () => {
             anchorEl={menuAnchor.current}
             open={menuOpen}
             onClose={() => setMenuOpen(false)}
-            onClick={handleDarkMode}
-          >
+            >
             <MenuItem>Profile</MenuItem>
             <MenuItem>My account</MenuItem>
-            <MenuItem>
+            <MenuItem onClick={handleDarkMode}>
               {darkMode ? <Brightness2Icon /> : <Brightness5Icon />}
               <Switch checked={darkMode} />
             </MenuItem>
