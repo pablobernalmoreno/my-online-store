@@ -8,7 +8,7 @@ const pb = new PocketBase("http://127.0.0.1:8090");
 const MySection = styled("section")`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
 
 const CardsContainer = () => {

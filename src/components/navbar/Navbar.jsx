@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AppBar,
+  Badge,
   Grid,
   IconButton,
   Menu,
@@ -14,13 +15,17 @@ import PersonIcon from "@material-ui/icons/Person";
 import Brightness5Icon from "@material-ui/icons/Brightness5";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import SearchBar from "../searchbar/SearchBar";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDarkTheme } from "../../redux/actions/actions";
+import SimpleDialog from "../dialog/SimpleDialog";
 
 const MyNavbar = styled(AppBar)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: sticky;
 `;
 
 const MyIconButton = styled(IconButton)`
@@ -37,12 +42,20 @@ const MyGrid = styled(Grid)`
   display: flex;
   align-items: flex-end;
 `;
+const MyStickyGrid = styled(Grid)`
+  position: sticky;
+  top: -10px;
+  z-index: 200;
+`;
 
 const Navbar = () => {
   const menuAnchor = useRef();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
+  const items = useSelector((state) => state.addToCartReducer);
+  const itemsInCart = items.length;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(isDark);
   const dispatch = useDispatch();
 
   const handleMenuClick = (e) => {
@@ -55,11 +68,21 @@ const Navbar = () => {
     dispatch(changeDarkTheme(!darkMode));
   };
 
-  console.log(isDark);
+  const handleDialogOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
+  useEffect(() => {
+    console.log(42, itemsInCart);
+  }, [itemsInCart]);
 
   return (
-    <MyGrid container spacing={3}>
-      <MyNavbar position="sticky">
+    <MyStickyGrid container spacing={3}>
+      <MyNavbar>
         <MyGrid item xs={2}>
           <MyIconButton>
             <MenuIcon />
@@ -70,6 +93,16 @@ const Navbar = () => {
         </MyGrid>
         <MyGrid item xd={5}>
           <SearchBar />
+          <MyIconButton onClick={handleDialogOpen}>
+            {itemsInCart === 0 ? (
+              <AddShoppingCartIcon />
+            ) : (
+              <Badge badgeContent={itemsInCart} color="primary">
+                <ShoppingCartIcon />
+              </Badge>
+            )}
+          </MyIconButton>
+          <SimpleDialog open={dialogOpen} onClose={handleDialogClose} />
           <MyIconButton ref={menuAnchor} onClick={handleMenuClick}>
             <PersonIcon />
           </MyIconButton>
@@ -87,7 +120,7 @@ const Navbar = () => {
           </Menu>
         </MyGrid>
       </MyNavbar>
-    </MyGrid>
+    </MyStickyGrid>
   );
 };
 

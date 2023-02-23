@@ -8,13 +8,18 @@ import {
   Typography,
 } from "@material-ui/core";
 import { styled } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemToCart } from "../../redux/actions/actions";
+import SimpleDialog from "../dialog/SimpleDialog";
 
-const MyCard = styled(Card)`
-  height: 400px;
-  width: 350px;
-  margin: 10px;
-`;
+const MyCard = styled(Card)(({ isDark }) => ({
+  height: "400px",
+  width: "400px",
+  margin: "10px",
+  backgroundColor: isDark ? "#262626" : "#ffffff",
+  color: isDark ? "#ffffff" : "#000000",
+}));
 
 const MyCardMedia = styled(CardMedia)`
   height: 200px;
@@ -26,8 +31,16 @@ const PriceTypography = styled(Typography)`
 `;
 
 const GameCard = ({ source, name, description, price, stock }) => {
+  const dispatch = useDispatch();
+  const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
+
+  const handleAddToCart = (name, src, price) => {
+    const item = { name, src, price };
+    dispatch(addItemToCart(item));
+  };
+
   return (
-    <MyCard>
+    <MyCard isDark={isDark}>
       <CardActionArea>
         <MyCardMedia
           component="img"
@@ -52,7 +65,11 @@ const GameCard = ({ source, name, description, price, stock }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => handleAddToCart(name, source, price)}
+        >
           Add to Cart
         </Button>
         <Button size="small" color="primary">
