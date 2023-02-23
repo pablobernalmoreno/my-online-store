@@ -68,11 +68,12 @@ const GameCard = ({ source, name, description, price, stock }) => {
         <Button
           size="small"
           color="primary"
+          variant="contained"
           onClick={() => handleAddToCart(name, source, price)}
         >
           Add to Cart
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" variant="contained">
           View Details
         </Button>
       </CardActions>
