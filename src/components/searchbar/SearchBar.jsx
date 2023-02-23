@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, TextField, Typography } from "@material-ui/core";
+import { IconButton, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { styled } from "@mui/system";
 
