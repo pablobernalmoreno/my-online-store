@@ -11,7 +11,6 @@ import { styled } from "@mui/system";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../redux/actions/actions";
-import SimpleDialog from "../dialog/SimpleDialog";
 
 const MyCard = styled(Card)(({ isDark }) => ({
   height: "400px",
