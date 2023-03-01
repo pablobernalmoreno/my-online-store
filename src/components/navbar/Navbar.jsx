@@ -50,12 +50,13 @@ const MyStickyGrid = styled(Grid)`
 
 const Navbar = () => {
   const menuAnchor = useRef();
-  const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
-  const items = useSelector((state) => state.addToCartReducer);
-  const itemsInCart = items.length;
+  const [items] = useState(useSelector((state) => state.addToCartReducer));
+  const [itemsInCart, setItemsInCart] = useState();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(isDark);
+  const [darkMode, setDarkMode] = useState(
+    useSelector((state) => state.darkThemeReducer.darkTheme)
+  );
   const dispatch = useDispatch();
 
   const handleMenuClick = (e) => {
@@ -77,8 +78,8 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    console.log(42, itemsInCart);
-  }, [itemsInCart]);
+    setItemsInCart(items.length);
+  }, [items.length]);
 
   return (
     <MyStickyGrid container spacing={3}>
