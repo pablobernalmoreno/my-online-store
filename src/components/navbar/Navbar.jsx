@@ -21,6 +21,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeDarkTheme } from "../../redux/actions/actions";
 import SimpleDialog from "../dialog/SimpleDialog";
 
+/**
+ * Styled AppBar component
+ * @component
+ * @returns {Component} Styled AppBar component
+ */
 const MyNavbar = styled(AppBar)`
   display: flex;
   flex-direction: row;
@@ -28,26 +33,52 @@ const MyNavbar = styled(AppBar)`
   position: sticky;
 `;
 
+/**
+ * Styled IconButton component
+ * @component
+ * @returns {Component} Styled IconButton component
+ */
 const MyIconButton = styled(IconButton)`
   color: white;
   margin: 0 10px;
 `;
 
+/**
+ * Styled Typography component
+ * @component
+ * @returns {Component} Styled Typography component
+ */
 const MyTypography = styled(Typography)`
   font-size: 40px;
   color: #ffffff;
 `;
 
+/**
+ * Styled Grid component
+ * @component
+ * @returns {Component} Styled Grid component
+ */
 const MyGrid = styled(Grid)`
   display: flex;
   align-items: flex-end;
 `;
+
+/**
+ * Styled Grid component
+ * @component
+ * @returns {Component} Styled Grid component
+ */
 const MyStickyGrid = styled(Grid)`
   position: sticky;
   top: -10px;
   z-index: 200;
 `;
 
+/**
+ * Navbar component
+ * @component
+ * @returns {Component} Navbar for the navigation of the whole app
+ */
 const Navbar = () => {
   const menuAnchor = useRef();
   const [items] = useState(useSelector((state) => state.addToCartReducer));
@@ -59,20 +90,33 @@ const Navbar = () => {
   );
   const dispatch = useDispatch();
 
-  const handleMenuClick = (e) => {
-    e.preventDefault();
+  /**
+   * 
+   * Sets the state of the menu to true 
+   */
+  const handleMenuClick = () => {
     setMenuOpen(true);
   };
 
+  /**
+   * Sets the darkMode state to the opposite of the previous state
+   * Dispatches changeDarkTheme with the opposite of the previous state in the global redux state
+   */
   const handleDarkMode = () => {
     setDarkMode(!darkMode);
     dispatch(changeDarkTheme(!darkMode));
   };
 
+  /**
+   * Sets the state dialogOpen to true
+   */
   const handleDialogOpen = () => {
     setDialogOpen(true);
   };
 
+  /**
+   * Sets the state dialogOpen to false
+   */
   const handleDialogClose = () => {
     setDialogOpen(false);
   };

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/navbar/Navbar.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/navbar/Navbar.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useRef, useState } from "react";
+import {
+  AppBar,
+  Badge,
+  Grid,
+  IconButton,
+  Menu,
+  MenuItem,
+  Switch,
+  Typography,
+} from "@material-ui/core";
+import { styled } from "@mui/system";
+import MenuIcon from "@material-ui/icons/Menu";
+import PersonIcon from "@material-ui/icons/Person";
+import Brightness5Icon from "@material-ui/icons/Brightness5";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
+import SearchBar from "../searchbar/SearchBar";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { useDispatch, useSelector } from "react-redux";
+import { changeDarkTheme } from "../../redux/actions/actions";
+import SimpleDialog from "../dialog/SimpleDialog";
+
+/**
+ * Styled AppBar component
+ * @component
+ * @returns {Component} Styled AppBar component
+ */
+const MyNavbar = styled(AppBar)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: sticky;
+`;
+
+/**
+ * Styled IconButton component
+ * @component
+ * @returns {Component} Styled IconButton component
+ */
+const MyIconButton = styled(IconButton)`
+  color: white;
+  margin: 0 10px;
+`;
+
+/**
+ * Styled Typography component
+ * @component
+ * @returns {Component} Styled Typography component
+ */
+const MyTypography = styled(Typography)`
+  font-size: 40px;
+  color: #ffffff;
+`;
+
+/**
+ * Styled Grid component
+ * @component
+ * @returns {Component} Styled Grid component
+ */
+const MyGrid = styled(Grid)`
+  display: flex;
+  align-items: flex-end;
+`;
+
+/**
+ * Styled Grid component
+ * @component
+ * @returns {Component} Styled Grid component
+ */
+const MyStickyGrid = styled(Grid)`
+  position: sticky;
+  top: -10px;
+  z-index: 200;
+`;
+
+/**
+ * Navbar component
+ * @component
+ * @returns {Component} Navbar for the navigation of the whole app
+ */
+const Navbar = () => {
+  const menuAnchor = useRef();
+  const [items] = useState(useSelector((state) => state.addToCartReducer));
+  const [itemsInCart, setItemsInCart] = useState();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    useSelector((state) => state.darkThemeReducer.darkTheme)
+  );
+  const dispatch = useDispatch();
+
+  /**
+   * 
+   * Sets the state of the menu to true 
+   */
+  const handleMenuClick = () => {
+    setMenuOpen(true);
+  };
+
+  /**
+   * Sets the darkMode state to the opposite of the previous state
+   * Dispatches changeDarkTheme with the opposite of the previous state in the global redux state
+   */
+  const handleDarkMode = () => {
+    setDarkMode(!darkMode);
+    dispatch(changeDarkTheme(!darkMode));
+  };
+
+  /**
+   * Sets the state dialogOpen to true
+   */
+  const handleDialogOpen = () => {
+    setDialogOpen(true);
+  };
+
+  /**
+   * Sets the state dialogOpen to false
+   */
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
+  useEffect(() => {
+    setItemsInCart(items.length);
+  }, [items.length]);
+
+  return (
+    &lt;MyStickyGrid container spacing={3}>
+      &lt;MyNavbar>
+        &lt;MyGrid item xs={2}>
+          &lt;MyIconButton>
+            &lt;MenuIcon />
+          &lt;/MyIconButton>
+        &lt;/MyGrid>
+        &lt;MyGrid item xs={5}>
+          &lt;MyTypography variant="h1">Find your games!&lt;/MyTypography>
+        &lt;/MyGrid>
+        &lt;MyGrid item xd={5}>
+          &lt;SearchBar />
+          &lt;MyIconButton onClick={handleDialogOpen}>
+            {itemsInCart === 0 ? (
+              &lt;AddShoppingCartIcon />
+            ) : (
+              &lt;Badge badgeContent={itemsInCart} color="primary">
+                &lt;ShoppingCartIcon />
+              &lt;/Badge>
+            )}
+          &lt;/MyIconButton>
+          &lt;SimpleDialog open={dialogOpen} onClose={handleDialogClose} />
+          &lt;MyIconButton ref={menuAnchor} onClick={handleMenuClick}>
+            &lt;PersonIcon />
+          &lt;/MyIconButton>
+          &lt;Menu
+            anchorEl={menuAnchor.current}
+            open={menuOpen}
+            onClose={() => setMenuOpen(false)}
+          >
+            &lt;MenuItem>Profile&lt;/MenuItem>
+            &lt;MenuItem>My account&lt;/MenuItem>
+            &lt;MenuItem onClick={handleDarkMode}>
+              {darkMode ? &lt;Brightness2Icon /> : &lt;Brightness5Icon />}
+              &lt;Switch checked={darkMode} />
+            &lt;/MenuItem>
+          &lt;/Menu>
+        &lt;/MyGrid>
+      &lt;/MyNavbar>
+    &lt;/MyStickyGrid>
+  );
+};
+
+export default Navbar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CardsContainer.html">CardsContainer</a></li><li><a href="GameCard.html">GameCard</a></li><li><a href="Main.html">Main</a></li><li><a href="MyCard.html">MyCard</a></li><li><a href="MyCardMedia.html">MyCardMedia</a></li><li><a href="MyDeleteIcon.html">MyDeleteIcon</a></li><li><a href="MyDialogList.html">MyDialogList</a></li><li><a href="MyDialogTitle.html">MyDialogTitle</a></li><li><a href="MyForm.html">MyForm</a></li><li><a href="MyGrid.html">MyGrid</a></li><li><a href="MyIconButton.html">MyIconButton</a></li><li><a href="MyImage.html">MyImage</a></li><li><a href="MyListGrid.html">MyListGrid</a></li><li><a href="MyListGridContainer.html">MyListGridContainer</a></li><li><a href="MyListItemText.html">MyListItemText</a></li><li><a href="MyMain.html">MyMain</a></li><li><a href="MyNavbar.html">MyNavbar</a></li><li><a href="MySection.html">MySection</a></li><li><a href="MyStickyGrid.html">MyStickyGrid</a></li><li><a href="MyTextField.html">MyTextField</a></li><li><a href="MyTypography.html">MyTypography</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PriceTypography.html">PriceTypography</a></li><li><a href="SearchBar.html">SearchBar</a></li><li><a href="SimpleDialog.html">SimpleDialog</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addItemToCart">addItemToCart</a></li><li><a href="global.html#addToCartReducer">addToCartReducer</a></li><li><a href="global.html#changeDarkTheme">changeDarkTheme</a></li><li><a href="global.html#darkThemeReducer">darkThemeReducer</a></li><li><a href="global.html#removeFromCart">removeFromCart</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 02 2023 15:22:15 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

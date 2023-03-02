@@ -5,6 +5,11 @@ import { styled } from "@mui/system";
 
 const primaryColor = "#363e8a";
 
+/**
+ * Styled IconButton component
+ * @component
+ * @returns {Component} Styled IconButton component
+ */
 const MyIconButton = styled(IconButton)`
   color: #ffffff;
   &:hover {
@@ -12,12 +17,22 @@ const MyIconButton = styled(IconButton)`
   }
 `;
 
+/**
+ * Styled form component
+ * @component
+ * @returns {Component} Styled form component
+ */
 const MyForm = styled("form")`
   display: flex;
   flex-direction: row;
   align-items: flex-end;
 `;
 
+/**
+ * Styled TextField component
+ * @component
+ * @returns {Component} Styled TextField component
+ */
 const MyTextField = styled(TextField)`
   width: 100%;
   & .MuiFilledInput-root, .Mui-focused {
@@ -26,6 +41,11 @@ const MyTextField = styled(TextField)`
   },
 `;
 
+/**
+ * SearchBar
+ * @component
+ * @returns {Component} SearchBar to find games
+ */
 const SearchBar = () => {
   return (
     <MyForm>
