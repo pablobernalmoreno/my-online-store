@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import {
   Button,
   Dialog,
@@ -6,7 +7,6 @@ import {
   Grid,
   IconButton,
   List,
-  ListItem,
   ListItemText,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -52,7 +52,7 @@ const MyDeleteIcon = styled(DeleteIcon)`
 const SimpleDialog = ({ open, onClose }) => {
   const dispatch = useDispatch();
   const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
-  const [items] = useState(useSelector((state) => state.addToCartReducer))
+  const [items] = useState(useSelector((state) => state.addToCartReducer));
 
   const handleRemoveItem = (index) => {
     dispatch(removeFromCart(index));
@@ -84,6 +84,19 @@ const SimpleDialog = ({ open, onClose }) => {
       </MyDialogList>
     </Dialog>
   );
+};
+
+MyDialogTitle.propTypes = {
+  isDark: PropTypes.bool.isRequired,
+};
+
+MyDialogList.propTypes = {
+  isDark: PropTypes.bool.isRequired,
+};
+
+SimpleDialog.propType = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default SimpleDialog;

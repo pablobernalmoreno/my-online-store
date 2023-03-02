@@ -17,7 +17,7 @@ const CardsContainer = () => {
   useEffect(() => {
     const fetchData = async () => {
       setCards(
-        await pb.collection("games").getFullList(200 /* batch size */, {
+        await pb.collection("games").getFullList(200, {
           sort: "-created",
         })
       );

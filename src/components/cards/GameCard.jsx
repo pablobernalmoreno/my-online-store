@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   Button,
   Card,
@@ -8,7 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { styled } from "@mui/system";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../redux/actions/actions";
 
@@ -29,7 +30,13 @@ const PriceTypography = styled(Typography)`
   font-weight: bold;
 `;
 
-const GameCard = ({ source, name, description, price, stock }) => {
+const GameCard = ({
+  source,
+  name,
+  description = "A nice game",
+  price,
+  stock,
+}) => {
   const dispatch = useDispatch();
   const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
 
@@ -78,6 +85,18 @@ const GameCard = ({ source, name, description, price, stock }) => {
       </CardActions>
     </MyCard>
   );
+};
+
+GameCard.propTypes = {
+  source: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  price: PropTypes.number.isRequired,
+  stock: PropTypes.number.isRequired,
+};
+
+MyCard.propTypes = {
+  isDark: PropTypes.bool.isRequired,
 };
 
 export default GameCard;

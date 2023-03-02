@@ -1,5 +1,6 @@
-import { styled } from "@mui/system";
 import React from "react";
+import PropTypes from "prop-types";
+import { styled } from "@mui/system";
 import { useSelector } from "react-redux";
 import CardsContainer from "../cards/CardsContainer";
 
@@ -15,6 +16,10 @@ const Main = () => {
       <CardsContainer />
     </MyMain>
   );
+};
+
+MyMain.propTypes = {
+  isDark: PropTypes.bool.isRequired,
 };
 
 export default Main;
