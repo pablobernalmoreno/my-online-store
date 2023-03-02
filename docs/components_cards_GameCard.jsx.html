@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/cards/GameCard.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/cards/GameCard.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import PropTypes from "prop-types";
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@material-ui/core";
+import { styled } from "@mui/system";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemToCart } from "../../redux/actions/actions";
+
+/**
+ * Styled Card component
+ * @component
+ * @param {boolean} isDark Check for the dark/light theme
+ * @returns {Component} Styled Card component
+ */
+const MyCard = styled(Card)(({ isDark }) => ({
+  height: "400px",
+  width: "400px",
+  margin: "10px",
+  backgroundColor: isDark ? "#262626" : "#ffffff",
+  color: isDark ? "#ffffff" : "#000000",
+}));
+
+/**
+ * Styled CardMedia component
+ * @component
+ * @returns {Component} Styled CardMedia component
+ */
+const MyCardMedia = styled(CardMedia)`
+  height: 200px;
+  width: 100%;
+`;
+
+/**
+ * Styled Typography component
+ * @component
+ * @returns {Component} Styled Typography component
+ */
+const PriceTypography = styled(Typography)`
+  font-weight: bold;
+`;
+
+/**
+ * Card that shows the game info
+ * @component
+ * @param {string} source Link source for the game image, is required
+ * @param {string} name  Name of the game, is required
+ * @param {string} description Description for the game, optional
+ * @param {number} price Price of the game, is required
+ * @param {number} stock Quantity of the game in store, is required
+ * @returns {Component} Game card with all the game info
+ */
+const GameCard = ({
+  source,
+  name,
+  description = "A nice game",
+  price,
+  stock,
+}) => {
+  const dispatch = useDispatch();
+  const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
+
+  /**
+   * Adds items to the cart redux state
+   * @param {string} name Name of the game
+   * @param {string} src Source image of the game
+   * @param {string} price Price of the game
+   * Dispatches the addItemToCart action for the global redux cart state
+   */
+  const handleAddToCart = (name, src, price) => {
+    const item = { name, src, price };
+    dispatch(addItemToCart(item));
+  };
+
+  return (
+    &lt;MyCard isDark={isDark}>
+      &lt;CardActionArea>
+        &lt;MyCardMedia
+          component="img"
+          alt={name}
+          height="140"
+          image={source}
+          title={name}
+        />
+        &lt;CardContent>
+          &lt;Typography gutterBottom variant="h5" component="h2">
+            {name}
+          &lt;/Typography>
+          &lt;Typography variant="body2" component="p">
+            {description}
+          &lt;/Typography>
+          &lt;PriceTypography variant="body1" component="p">
+            $ {price}
+          &lt;/PriceTypography>
+          &lt;Typography variant="body2" component="p">
+            Currently in stock: {stock}
+          &lt;/Typography>
+        &lt;/CardContent>
+      &lt;/CardActionArea>
+      &lt;CardActions>
+        &lt;Button
+          size="small"
+          color="primary"
+          variant="contained"
+          onClick={() => handleAddToCart(name, source, price)}
+        >
+          Add to Cart
+        &lt;/Button>
+        &lt;Button size="small" color="primary" variant="contained">
+          View Details
+        &lt;/Button>
+      &lt;/CardActions>
+    &lt;/MyCard>
+  );
+};
+
+MyCard.propTypes = {
+  isDark: PropTypes.bool.isRequired,
+};
+
+GameCard.propTypes = {
+  source: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  price: PropTypes.number.isRequired,
+  stock: PropTypes.number.isRequired,
+};
+
+export default GameCard;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CardsContainer.html">CardsContainer</a></li><li><a href="GameCard.html">GameCard</a></li><li><a href="Main.html">Main</a></li><li><a href="MyCard.html">MyCard</a></li><li><a href="MyCardMedia.html">MyCardMedia</a></li><li><a href="MyDeleteIcon.html">MyDeleteIcon</a></li><li><a href="MyDialogList.html">MyDialogList</a></li><li><a href="MyDialogTitle.html">MyDialogTitle</a></li><li><a href="MyForm.html">MyForm</a></li><li><a href="MyGrid.html">MyGrid</a></li><li><a href="MyIconButton.html">MyIconButton</a></li><li><a href="MyImage.html">MyImage</a></li><li><a href="MyListGrid.html">MyListGrid</a></li><li><a href="MyListGridContainer.html">MyListGridContainer</a></li><li><a href="MyListItemText.html">MyListItemText</a></li><li><a href="MyMain.html">MyMain</a></li><li><a href="MyNavbar.html">MyNavbar</a></li><li><a href="MySection.html">MySection</a></li><li><a href="MyStickyGrid.html">MyStickyGrid</a></li><li><a href="MyTextField.html">MyTextField</a></li><li><a href="MyTypography.html">MyTypography</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PriceTypography.html">PriceTypography</a></li><li><a href="SearchBar.html">SearchBar</a></li><li><a href="SimpleDialog.html">SimpleDialog</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addItemToCart">addItemToCart</a></li><li><a href="global.html#addToCartReducer">addToCartReducer</a></li><li><a href="global.html#changeDarkTheme">changeDarkTheme</a></li><li><a href="global.html#darkThemeReducer">darkThemeReducer</a></li><li><a href="global.html#removeFromCart">removeFromCart</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 02 2023 15:22:15 GMT-0500 (hora estándar de Colombia)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
