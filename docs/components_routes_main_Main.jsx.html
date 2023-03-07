@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: redux/reducers/addToCartReducer.js</title>
+    <title>JSDoc: Source: components/routes/main/Main.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: redux/reducers/addToCartReducer.js</h1>
+    <h1 class="page-title">Source: components/routes/main/Main.jsx</h1>
 
     
 
@@ -26,30 +26,42 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { ADDITEMTOCART, REMOVEFROMCART } from "../types/types";
-
-const initialState = [];
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import PropTypes from "prop-types";
+import { styled } from "@mui/system";
+import { useSelector } from "react-redux";
+import CardsContainer from "../../cards/CardsContainer";
 
 /**
- * 
- * @param {Array} state array of objects
- * @param {object} action to be done to the state
- * @returns {object} state based on the type of action that it did to the state
+ * Styled main component
+ * @component
+ * @param {boolean} isDark Check for the dark/light theme
+ * @returns {Component} Styled main component
  */
-const addToCartReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADDITEMTOCART:
-      state.push(action.payload);
-      return state;
-    case REMOVEFROMCART:
-      state.splice(action.payload, 1);
-      return state;
-    default:
-      return state;
-  }
+export const MyMain = styled("main")(({ isDark }) => ({
+  marginTop: "10px",
+  backgroundColor: isDark ? "#121212" : "#e0e0e0",
+}));
+
+/**
+ * The main page
+ * @component
+ * @returns {Component} Main page
+ */
+const Main = () => {
+  const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
+  return (
+    &lt;MyMain isDark={isDark}>
+      &lt;CardsContainer />
+    &lt;/MyMain>
+  );
 };
 
-export default addToCartReducer;
+MyMain.propTypes = {
+  isDark: PropTypes.bool.isRequired,
+};
+
+export default Main;
 </code></pre>
         </article>
     </section>

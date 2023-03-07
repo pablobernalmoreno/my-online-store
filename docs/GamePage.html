@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: redux/reducers/addToCartReducer.js</title>
+    <title>JSDoc: Class: GamePage</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,42 +17,159 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: redux/reducers/addToCartReducer.js</h1>
+    <h1 class="page-title">Class: GamePage</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import { ADDITEMTOCART, REMOVEFROMCART } from "../types/types";
+        <h2><span class="attribs"><span class="type-signature"></span></span>GamePage<span class="signature">()</span><span class="type-signature"> &rarr; {Component}</span></h2>
+        
+    
+</header>
 
-const initialState = [];
+<article>
+    <div class="container-overview">
+    
+        
 
-/**
- * 
- * @param {Array} state array of objects
- * @param {object} action to be done to the state
- * @returns {object} state based on the type of action that it did to the state
- */
-const addToCartReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADDITEMTOCART:
-      state.push(action.payload);
-      return state;
-    case REMOVEFROMCART:
-      state.splice(action.payload, 1);
-      return state;
-    default:
-      return state;
-  }
-};
+    
 
-export default addToCartReducer;
-</code></pre>
-        </article>
-    </section>
+    
+    <h4 class="name" id="GamePage"><span class="type-signature"></span>new GamePage<span class="signature">()</span><span class="type-signature"> &rarr; {Component}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>The game detail page</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_routes_gamePage_GamePage.jsx.html">components/routes/gamePage/GamePage.jsx</a>, <a href="components_routes_gamePage_GamePage.jsx.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Game page</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Component</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

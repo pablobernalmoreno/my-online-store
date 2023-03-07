@@ -22,12 +22,12 @@ const MySection = styled("section")`
  * @component
  * @returns {Component} Mapping of the elements as Cards
  */
-
 const CardsContainer = () => {
   const [cards, setCards] = useState();
 
   useEffect(() => {
     /**
+     * Async
      * Set api collection in the cards state
      *
      */

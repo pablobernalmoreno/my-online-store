@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: redux/reducers/addToCartReducer.js</title>
+    <title>JSDoc: Source: components/routes/gamePage/GamePage.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: redux/reducers/addToCartReducer.js</h1>
+    <h1 class="page-title">Source: components/routes/gamePage/GamePage.jsx</h1>
 
     
 
@@ -26,30 +26,30 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { ADDITEMTOCART, REMOVEFROMCART } from "../types/types";
-
-const initialState = [];
+            <pre class="prettyprint source linenums"><code>import { Typography } from "@material-ui/core";
+import React from "react";
+import { useSelector } from "react-redux";
+import { MyMain } from "../main/Main";
 
 /**
- * 
- * @param {Array} state array of objects
- * @param {object} action to be done to the state
- * @returns {object} state based on the type of action that it did to the state
+ * The game detail page
+ * @component
+ * @returns {Component} Game page
  */
-const addToCartReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADDITEMTOCART:
-      state.push(action.payload);
-      return state;
-    case REMOVEFROMCART:
-      state.splice(action.payload, 1);
-      return state;
-    default:
-      return state;
-  }
+const GamePage = () => {
+  const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
+  return (
+    &lt;MyMain isDark={isDark}>
+      &lt;Typography>Titulo&lt;/Typography>
+      &lt;Typography>Descripcion (más detallada)&lt;/Typography>
+      &lt;Typography>Imagen&lt;/Typography>
+      &lt;Typography>Cantidad en stock&lt;/Typography>
+      &lt;Typography>Precio&lt;/Typography>
+    &lt;/MyMain>
+  );
 };
 
-export default addToCartReducer;
+export default GamePage;
 </code></pre>
         </article>
     </section>
