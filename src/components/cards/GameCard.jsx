@@ -70,7 +70,7 @@ const GameCard = ({
    * Adds items to the cart redux state
    * @param {string} name Name of the game
    * @param {string} src Source image of the game
-   * @param {string} price Price of the game
+   * @param {number} price Price of the game
    * Dispatches the addItemToCart action for the global redux cart state
    */
   const handleAddToCart = (name, src, price) => {

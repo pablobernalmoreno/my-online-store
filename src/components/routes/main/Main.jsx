@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/system";
 import { useSelector } from "react-redux";
-import CardsContainer from "../cards/CardsContainer";
+import CardsContainer from "../../cards/CardsContainer";
 
 /**
  * Styled main component
@@ -10,7 +10,7 @@ import CardsContainer from "../cards/CardsContainer";
  * @param {boolean} isDark Check for the dark/light theme
  * @returns {Component} Styled main component
  */
-const MyMain = styled("main")(({ isDark }) => ({
+export const MyMain = styled("main")(({ isDark }) => ({
   marginTop: "10px",
   backgroundColor: isDark ? "#121212" : "#e0e0e0",
 }));

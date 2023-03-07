@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: redux/reducers/addToCartReducer.js</title>
+    <title>JSDoc: Source: components/routes/errorPage/ErrorPage.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: redux/reducers/addToCartReducer.js</h1>
+    <h1 class="page-title">Source: components/routes/errorPage/ErrorPage.jsx</h1>
 
     
 
@@ -26,30 +26,27 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { ADDITEMTOCART, REMOVEFROMCART } from "../types/types";
-
-const initialState = [];
+            <pre class="prettyprint source linenums"><code>import { useRouteError } from "react-router-dom";
 
 /**
- * 
- * @param {Array} state array of objects
- * @param {object} action to be done to the state
- * @returns {object} state based on the type of action that it did to the state
+ * Error page
+ * @component
+ * @returns {Component} Error page
  */
-const addToCartReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADDITEMTOCART:
-      state.push(action.payload);
-      return state;
-    case REMOVEFROMCART:
-      state.splice(action.payload, 1);
-      return state;
-    default:
-      return state;
-  }
-};
+export const ErrorPage = () => {
+  const error = useRouteError();
+  console.error(error);
 
-export default addToCartReducer;
+  return (
+    &lt;div id="error-page">
+      &lt;h1>Oops!&lt;/h1>
+      &lt;p>Sorry, an unexpected error has occurred.&lt;/p>
+      &lt;p>
+        &lt;i>{error.statusText || error.message}&lt;/i>
+      &lt;/p>
+    &lt;/div>
+  );
+};
 </code></pre>
         </article>
     </section>
