@@ -7,6 +7,9 @@ import store from "./redux/store";
 import GamePage from "./components/routes/gamePage/GamePage";
 import { ErrorPage } from "./components/routes/errorPage/ErrorPage";
 
+/**
+ * Router for the many pages
+ */
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,11 +17,15 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "contacts/:contactId",
+    path: "game/:gameId",
     element: <GamePage />,
   },
 ]);
 
+/**
+ * 
+ * @returns Whole App
+ */
 const App = () => {
   return (
     <Provider store={store}>

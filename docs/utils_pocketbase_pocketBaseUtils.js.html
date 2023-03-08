@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: MyNavbar</title>
+    <title>JSDoc: Source: utils/pocketbase/pocketBaseUtils.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,159 +17,71 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: MyNavbar</h1>
+    <h1 class="page-title">Source: utils/pocketbase/pocketBaseUtils.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>MyNavbar<span class="signature">()</span><span class="type-signature"> &rarr; {Component}</span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-
-    
-    <h4 class="name" id="MyNavbar"><span class="type-signature"></span>new MyNavbar<span class="signature">()</span><span class="type-signature"> &rarr; {Component}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Styled AppBar component</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_navbar_Navbar.jsx.html">components/navbar/Navbar.jsx</a>, <a href="components_navbar_Navbar.jsx.html#line29">line 29</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Styled AppBar component</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Component</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import PocketBase from "pocketbase";
+import { useEffect, useState } from "react";
+
+const pb = new PocketBase("http://127.0.0.1:8090");
+
+/**
+ * Custom hook created to fetch all the games in the database
+ * @returns games array
+ */
+export const useFetchData = () => {
+  const [games, setGames] = useState();
+
+  useEffect(() => {
+    /**
+     * Async
+     * Set api collection in the cards state
+     *
+     */
+    const fetchData = async () => {
+      setGames(
+        await pb.collection("games").getFullList({
+          sort: "-created",
+        })
+      );
+    };
+
+    fetchData();
+  }, []);
+  return games;
+};
+
+/**
+ * Custom hook created to fetch one game by Id
+ * @returns game data
+ */
+export const useFetchById = (id) => {
+  const [gameData, setGameData] = useState();
+
+  useEffect(() => {
+    /**
+     * Async
+     * Set api collection in the cards state
+     *
+     */
+    const fetchData = async () => {
+      setGameData(await pb.collection("games").getOne(id, {}));
+    };
+
+    fetchData();
+  }, [id]);
+
+  return gameData;
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

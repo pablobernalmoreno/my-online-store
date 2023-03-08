@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import PocketBase from "pocketbase";
+import React from "react";
 import GameCard from "./GameCard";
 import { styled } from "@mui/system";
-
-const pb = new PocketBase("http://127.0.0.1:8090");
+import { useFetchData } from "../../utils/pocketbase/pocketBaseUtils";
 
 /**
  * Styled section component
@@ -23,24 +21,7 @@ const MySection = styled("section")`
  * @returns {Component} Mapping of the elements as Cards
  */
 const CardsContainer = () => {
-  const [cards, setCards] = useState();
-
-  useEffect(() => {
-    /**
-     * Async
-     * Set api collection in the cards state
-     *
-     */
-    const fetchData = async () => {
-      setCards(
-        await pb.collection("games").getFullList(200, {
-          sort: "-created",
-        })
-      );
-    };
-
-    fetchData();
-  }, []);
+  const cards = useFetchData();
 
   return (
     <MySection>
@@ -51,6 +32,7 @@ const CardsContainer = () => {
           description={card.description}
           price={card.price}
           stock={card.inStock}
+          id={card.id}
         />
       ))}
     </MySection>
