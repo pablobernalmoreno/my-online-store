@@ -12,6 +12,7 @@ import { styled } from "@mui/system";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../redux/actions/actions";
+import { Link } from "react-router-dom";
 
 /**
  * Styled Card component
@@ -47,6 +48,15 @@ const PriceTypography = styled(Typography)`
 `;
 
 /**
+ * Styled Link component
+ * @component
+ * @returns {Component} Styled Link component
+ */
+const MyLink = styled(Link)`
+  text-decoration: none;
+`;
+
+/**
  * Card that shows the game info
  * @component
  * @param {string} source Link source for the game image, is required
@@ -54,6 +64,7 @@ const PriceTypography = styled(Typography)`
  * @param {string} description Description for the game, optional
  * @param {number} price Price of the game, is required
  * @param {number} stock Quantity of the game in store, is required
+ * @param {string} id Id of the game in the DataBase
  * @returns {Component} Game card with all the game info
  */
 const GameCard = ({
@@ -62,6 +73,7 @@ const GameCard = ({
   description = "A nice game",
   price,
   stock,
+  id,
 }) => {
   const dispatch = useDispatch();
   const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
@@ -112,9 +124,11 @@ const GameCard = ({
         >
           Add to Cart
         </Button>
-        <Button size="small" color="primary" variant="contained">
-          View Details
-        </Button>
+        <MyLink to={`game/${id}`}>
+          <Button size="small" color="primary" variant="contained">
+            View Details
+          </Button>
+        </MyLink>
       </CardActions>
     </MyCard>
   );
@@ -130,6 +144,7 @@ GameCard.propTypes = {
   description: PropTypes.string,
   price: PropTypes.number.isRequired,
   stock: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default GameCard;
