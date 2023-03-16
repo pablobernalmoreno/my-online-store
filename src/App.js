@@ -23,7 +23,7 @@ const router = createBrowserRouter([
 ]);
 
 /**
- * 
+ *
  * @returns Whole App
  */
 const App = () => {
