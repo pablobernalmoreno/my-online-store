@@ -27,7 +27,7 @@ const CardsContainer = () => {
     <MySection>
       {cards?.map((card) => (
         <GameCard
-          source={card.image}
+          source={card.images[0]}
           name={card.name}
           description={card.description}
           price={card.price}
