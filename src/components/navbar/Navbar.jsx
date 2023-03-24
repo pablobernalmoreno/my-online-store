@@ -31,6 +31,7 @@ const MyNavbar = styled(AppBar)`
   flex-direction: row;
   justify-content: space-between;
   position: sticky;
+  background: #4057b8;
 `;
 
 /**
@@ -39,7 +40,7 @@ const MyNavbar = styled(AppBar)`
  * @returns {Component} Styled IconButton component
  */
 const MyIconButton = styled(IconButton)`
-  color: white;
+  color: #ffffff;
   margin: 0 10px;
 `;
 
@@ -91,8 +92,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   /**
-   * 
-   * Sets the state of the menu to true 
+   *
+   * Sets the state of the menu to true
    */
   const handleMenuClick = () => {
     setMenuOpen(true);
