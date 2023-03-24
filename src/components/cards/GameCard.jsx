@@ -12,7 +12,7 @@ import { styled } from "@mui/system";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../redux/actions/actions";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Styled Card component
@@ -48,15 +48,6 @@ const PriceTypography = styled(Typography)`
 `;
 
 /**
- * Styled Link component
- * @component
- * @returns {Component} Styled Link component
- */
-const MyLink = styled(Link)`
-  text-decoration: none;
-`;
-
-/**
  * Card that shows the game info
  * @component
  * @param {string} source Link source for the game image, is required
@@ -77,6 +68,7 @@ const GameCard = ({
 }) => {
   const dispatch = useDispatch();
   const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
+  const navigate = useNavigate();
 
   /**
    * Adds items to the cart redux state
@@ -85,14 +77,16 @@ const GameCard = ({
    * @param {number} price Price of the game
    * Dispatches the addItemToCart action for the global redux cart state
    */
-  const handleAddToCart = (name, src, price) => {
-    const item = { name, src, price };
+  const handleAddToCart = (name, src, price, id) => {
+    const item = { name, src, price, id };
     dispatch(addItemToCart(item));
   };
 
+  const shortDescription = `${description?.slice(0, 100)}...`;
+
   return (
     <MyCard isDark={isDark}>
-      <CardActionArea>
+      <CardActionArea onClick={() => navigate(`game/${id}`)}>
         <MyCardMedia
           component="img"
           alt={name}
@@ -105,7 +99,7 @@ const GameCard = ({
             {name}
           </Typography>
           <Typography variant="body2" component="p">
-            {description}
+            {shortDescription}
           </Typography>
           <PriceTypography variant="body1" component="p">
             $ {price}
@@ -120,15 +114,18 @@ const GameCard = ({
           size="small"
           color="primary"
           variant="contained"
-          onClick={() => handleAddToCart(name, source, price)}
+          onClick={() => handleAddToCart(name, source, price, id)}
         >
           Add to Cart
         </Button>
-        <MyLink to={`game/${id}`}>
-          <Button size="small" color="primary" variant="contained">
-            View Details
-          </Button>
-        </MyLink>
+        <Button
+          size="small"
+          color="primary"
+          variant="contained"
+          onClick={() => navigate(`game/${id}`)}
+        >
+          View Details
+        </Button>
       </CardActions>
     </MyCard>
   );

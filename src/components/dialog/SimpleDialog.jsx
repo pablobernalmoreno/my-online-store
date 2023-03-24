@@ -13,6 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import { removeFromCart } from "../../redux/actions/actions";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Styled image component
@@ -95,16 +96,26 @@ const MyDeleteIcon = styled(DeleteIcon)`
  */
 const SimpleDialog = ({ open, onClose }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
   const [items] = useState(useSelector((state) => state.addToCartReducer));
 
   /**
    * Removes item from cart based on its index
-   * @param {number} index Index of the element in the cart 
+   * @param {number} index Index of the element in the cart
    * Dispatches the removeFromCart action for the global redux cart state
    */
   const handleRemoveItem = (index) => {
     dispatch(removeFromCart(index));
+  };
+
+  /**
+   * Navigates to the game page of every game and closes the dialog
+   * @param {string} id of every item (game) in the dialog 
+   */
+  const handleViewPage = (id) => {
+    navigate(`game/${id}`);
+    onClose();
   };
 
   return (
@@ -120,12 +131,16 @@ const SimpleDialog = ({ open, onClose }) => {
               <MyListItemText primary={item.name} />
             </MyListGrid>
             <MyListGrid item xs={4}>
-              <Button color="primary" variant="contained" size="small">
+              <Button
+                onClick={() => handleViewPage(item.id)}
+                color="primary"
+                variant="contained"
+                size="small"
+              >
                 View Page
               </Button>
               <IconButton onClick={() => handleRemoveItem(index)}>
                 <MyDeleteIcon />
-                {index}
               </IconButton>
             </MyListGrid>
           </MyListGridContainer>

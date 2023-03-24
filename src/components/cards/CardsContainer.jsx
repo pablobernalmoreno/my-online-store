@@ -1,7 +1,7 @@
 import React from "react";
 import GameCard from "./GameCard";
 import { styled } from "@mui/system";
-import { useFetchData } from "../../utils/pocketbase/pocketBaseUtils";
+import { useFetchGameData } from "../../utils/pocketbase/pocketBaseUtils";
 
 /**
  * Styled section component
@@ -21,13 +21,13 @@ const MySection = styled("section")`
  * @returns {Component} Mapping of the elements as Cards
  */
 const CardsContainer = () => {
-  const cards = useFetchData();
+  const cards = useFetchGameData();
 
   return (
     <MySection>
       {cards?.map((card) => (
         <GameCard
-          source={card.images[0]}
+          source={card.image}
           name={card.name}
           description={card.description}
           price={card.price}

@@ -10,15 +10,25 @@ import { ErrorPage } from "./components/routes/errorPage/ErrorPage";
 /**
  * Router for the many pages
  */
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: (
+      <>
+        <Navbar />
+        <Main />
+      </>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "game/:gameId",
-    element: <GamePage />,
+    element: (
+      <>
+        <Navbar />
+        <GamePage />
+      </>
+    ),
   },
 ]);
 
@@ -29,7 +39,6 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <Provider store={store}>
-      <Navbar />
       <RouterProvider router={router} />
     </Provider>
   );
