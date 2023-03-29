@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GameCard from "./GameCard";
 import { styled } from "@mui/system";
 import { useFetchGameData } from "../../utils/pocketbase/pocketBaseUtils";
+import { useDispatch } from "react-redux";
+import { fetchData } from "../../redux/actions/actions";
 
 /**
  * Styled section component
  * @component
  * @returns {Component}  Styled section component
  */
-const MySection = styled("section")`
+export const MySection = styled("section")`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -22,6 +24,11 @@ const MySection = styled("section")`
  */
 const CardsContainer = () => {
   const cards = useFetchGameData();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchData(cards));
+  }, [cards, dispatch]);
 
   return (
     <MySection>

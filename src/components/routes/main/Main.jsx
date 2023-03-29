@@ -12,7 +12,7 @@ import CardsContainer from "../../cards/CardsContainer";
  */
 export const MyMain = styled("main")(({ isDark }) => ({
   marginTop: "10px",
-  backgroundColor: isDark ? "#121212" : "#e0e0e0",
+  backgroundColor: isDark ? "#121212" : "#ffffff",
   height: "100vh",
   width: "100vw",
 }));

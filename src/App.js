@@ -6,6 +6,7 @@ import Navbar from "./components/navbar/Navbar";
 import store from "./redux/store";
 import GamePage from "./components/routes/gamePage/GamePage";
 import { ErrorPage } from "./components/routes/errorPage/ErrorPage";
+import TagsPage from "./components/routes/tagsPage/TagsPage";
 
 /**
  * Router for the many pages
@@ -29,6 +30,17 @@ export const router = createBrowserRouter([
         <GamePage />
       </>
     ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "tags/:gameTag",
+    element: (
+      <>
+        <Navbar />
+        <TagsPage />
+      </>
+    ),
+    errorElement: <ErrorPage />,
   },
 ]);
 

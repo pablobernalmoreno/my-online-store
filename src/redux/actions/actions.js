@@ -1,9 +1,14 @@
-import { ADDITEMTOCART, CHANGEDARKTHEME, REMOVEFROMCART } from "../types/types";
+import {
+  ADDITEMTOCART,
+  CHANGEDARKTHEME,
+  FETCHDATA,
+  REMOVEFROMCART,
+} from "../types/types";
 
 /**
- * 
+ *
  * @param {boolean} state determines the state of the darktheme
- * @returns {object} with its type "CHANGEDARKTHEME" and as payload the state
+ * @returns {Object} with its type "CHANGEDARKTHEME" and as payload the state
  */
 export const changeDarkTheme = (state) => {
   return {
@@ -13,9 +18,9 @@ export const changeDarkTheme = (state) => {
 };
 
 /**
- * 
- * @param {object} state item object that has source, name and price of the game 
- * @returns {object} with its type "ADDITEMTOCART" and has as payload the state
+ *
+ * @param {Object} state item object that has source, name and price of the game
+ * @returns {Object} with its type "ADDITEMTOCART" and has as payload the state
  */
 export const addItemToCart = (state) => {
   return {
@@ -25,13 +30,25 @@ export const addItemToCart = (state) => {
 };
 
 /**
- * 
- * @param {number} state index number for each game in card 
- * @returns {object} with its type "ADDITEMTOCART" and has as payload the state
+ *
+ * @param {number} state index number for each game in card
+ * @returns {Object} with its type "ADDITEMTOCART" and has as payload the state
  */
 export const removeFromCart = (state) => {
   return {
     type: REMOVEFROMCART,
+    payload: state,
+  };
+};
+
+/**
+ *
+ * @param {Array} state game data fetched of all games
+ * @returns {Object} with its type "FETCHDATA" and has as payload the state
+ */
+export const fetchData = (state) => {
+  return {
+    type: FETCHDATA,
     payload: state,
   };
 };

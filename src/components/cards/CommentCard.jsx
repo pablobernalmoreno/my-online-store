@@ -3,6 +3,7 @@ import { Card, CardContent, Typography } from "@material-ui/core";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { styled } from "@mui/system";
+import { useSelector } from "react-redux";
 
 /**
  * Styled StarIcon component
@@ -14,12 +15,25 @@ const MyCommentCardFullStarIcon = styled(StarIcon)`
 `;
 
 /**
+ * Styled Card component
+ * @component
+ * @param {boolean} isDark Check for the dark/light theme
+ * @returns {Component} Styled Card component
+ */
+const MyCommentCard = styled(Card)(({ isDark }) => ({
+  margin: "1rem",
+  backgroundColor: isDark ? "#262626" : "#ffffff",
+  color: isDark ? "#ffffff" : "#000000",
+}));
+
+/**
  * Card component created for each comment object
  * @param {Object} commentObj containing all the comment info { rating, user, comment, date}
  * @returns Card for the comments
  */
 export const CommentCard = ({ commentObj }) => {
   const { rating, user, comment, date } = commentObj;
+  const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
 
   /**
    * Formats string to a date in the format Day(name), Month(short) Day(number), Year
@@ -45,7 +59,7 @@ export const CommentCard = ({ commentObj }) => {
   }
 
   return (
-    <Card style={{ margin: "1rem" }}>
+    <MyCommentCard isDark={isDark}>
       <CardContent>
         <Typography>
           {ratings.map((star) =>
@@ -58,6 +72,6 @@ export const CommentCard = ({ commentObj }) => {
         </Typography>
         <Typography variant="h6">{comment}</Typography>
       </CardContent>
-    </Card>
+    </MyCommentCard>
   );
 };

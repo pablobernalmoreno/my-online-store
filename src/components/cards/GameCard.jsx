@@ -24,7 +24,7 @@ const MyCard = styled(Card)(({ isDark }) => ({
   height: "400px",
   width: "400px",
   margin: "10px",
-  backgroundColor: isDark ? "#262626" : "#ffffff",
+  backgroundColor: isDark ? "#262626" : "#f0f0f0",
   color: isDark ? "#ffffff" : "#000000",
 }));
 
@@ -86,7 +86,7 @@ const GameCard = ({
 
   return (
     <MyCard isDark={isDark}>
-      <CardActionArea onClick={() => navigate(`game/${id}`)}>
+      <CardActionArea onClick={() => navigate(`/game/${id}`)}>
         <MyCardMedia
           component="img"
           alt={name}
@@ -95,18 +95,12 @@ const GameCard = ({
           title={name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5">
             {name}
           </Typography>
-          <Typography variant="body2" component="p">
-            {shortDescription}
-          </Typography>
-          <PriceTypography variant="body1" component="p">
-            $ {price}
-          </PriceTypography>
-          <Typography variant="body2" component="p">
-            Currently in stock: {stock}
-          </Typography>
+          <Typography variant="body2">{shortDescription}</Typography>
+          <PriceTypography variant="body1">$ {price}</PriceTypography>
+          <Typography variant="body2">Currently in stock: {stock}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -122,7 +116,7 @@ const GameCard = ({
           size="small"
           color="primary"
           variant="contained"
-          onClick={() => navigate(`game/${id}`)}
+          onClick={() => navigate(`/game/${id}`)}
         >
           View Details
         </Button>
