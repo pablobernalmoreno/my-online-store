@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   AppBar,
   Badge,
@@ -103,10 +103,10 @@ const Navbar = () => {
    * Sets the darkMode state to the opposite of the previous state
    * Dispatches changeDarkTheme with the opposite of the previous state in the global redux state
    */
-  const handleDarkMode = () => {
+  const handleDarkMode = useCallback(() => {
     setDarkMode(!darkMode);
     dispatch(changeDarkTheme(!darkMode));
-  };
+  }, [darkMode, dispatch]);
 
   /**
    * Sets the state dialogOpen to true
@@ -118,9 +118,9 @@ const Navbar = () => {
   /**
    * Sets the state dialogOpen to false
    */
-  const handleDialogClose = () => {
+  const handleDialogClose = useCallback(() => {
     setDialogOpen(false);
-  };
+  }, []);
 
   useEffect(() => {
     setItemsInCart(items.length);

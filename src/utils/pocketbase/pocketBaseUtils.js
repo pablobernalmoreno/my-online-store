@@ -44,35 +44,15 @@ export const useFetchGameById = (id) => {
      *
      */
     const fetchData = async () => {
-      setGameData(
-        await pb.collection("games").getOne(id, { $autoCancel: false })
-      );
+      const data = await pb.collection("games").getOne(id, {
+        expand: "comments",
+        $autoCancel: false,
+      });
+      setGameData(data);
     };
 
     fetchData();
   }, [id]);
 
   return gameData;
-};
-
-/**
- * Custom hook created to fetch each comment by id
- * @param {*} id of each comment
- * @returns
- */
-export const useFetchGameComments = (id) => {
-  const [gameComments, setGameComments] = useState([]);
-  const gameData = useFetchGameById(id);
-
-  useEffect(() => {
-    const fetchData = async (id) => {
-      const comment = await pb.collection("comments").getOne(id, {});
-      setGameComments((gameComments) => [...gameComments, comment]);
-    };
-    gameData?.comments?.forEach((comment) => {
-      fetchData(comment);
-    });
-  }, [gameData?.comments]);
-
-  return gameComments;
 };

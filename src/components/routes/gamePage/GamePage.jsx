@@ -2,11 +2,8 @@ import React from "react";
 import { Typography, Grid, Chip } from "@material-ui/core";
 import { MyMain } from "../main/Main";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import {
-  useFetchGameComments,
-  useFetchGameById,
-} from "../../../utils/pocketbase/pocketBaseUtils";
+import { useNavigate, useParams } from "react-router-dom";
+import { useFetchGameById } from "../../../utils/pocketbase/pocketBaseUtils";
 import styled from "@emotion/styled";
 import { Stack } from "@mui/system";
 import { CommentCard } from "../../cards/CommentCard";
@@ -16,9 +13,10 @@ import { CommentCard } from "../../cards/CommentCard";
  * @component
  * @returns {Component} Styled Typography component
  */
-const MyGamePageTypography = styled(Typography)`
-  margin: 1rem 2rem;
-`;
+const MyGamePageTypography = styled(Typography)(({ isDark }) => ({
+  margin: "1rem 2rem",
+  color: isDark ? "#ffffff" : "#000000",
+}));
 
 /**
  * Styled section component
@@ -59,10 +57,8 @@ const MyGamePageChip = styled(Chip)`
 const GamePage = () => {
   const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
   const { gameId } = useParams();
-
   const gameData = useFetchGameById(gameId);
-
-  const comments = useFetchGameComments(gameId);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -75,27 +71,32 @@ const GamePage = () => {
             />
           </Grid>
           <Grid item xs={6}>
-            <MyGamePageTypography variant="h4">
+            <MyGamePageTypography isDark={isDark} variant="h4">
               {gameData?.name}
             </MyGamePageTypography>
-            <MyGamePageTypography variant="h5">
+            <MyGamePageTypography isDark={isDark} variant="h5">
               {gameData?.description}
             </MyGamePageTypography>
             <MyGamePageSection>
-              <MyGamePageTypography variant="h6">
+              <MyGamePageTypography isDark={isDark} variant="h6">
                 Currently in stock: {gameData?.inStock}
               </MyGamePageTypography>
-              <MyGamePageTypography variant="h6">
+              <MyGamePageTypography isDark={isDark} variant="h6">
                 Price: {gameData?.price}$
               </MyGamePageTypography>
             </MyGamePageSection>
             <MyGamePageStack direction="row">
               {gameData?.tags?.map((tag) => (
-                <MyGamePageChip label={tag} onClick={() => {}} />
+                <MyGamePageChip
+                  label={tag}
+                  onClick={() => {
+                    navigate(`/tags/${tag}`);
+                  }}
+                />
               ))}
             </MyGamePageStack>
           </Grid>
-          {comments.map((comment) => (
+          {gameData?.expand?.comments?.map((comment) => (
             <CommentCard commentObj={comment} />
           ))}
         </Grid>
