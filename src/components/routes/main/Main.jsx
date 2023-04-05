@@ -23,7 +23,7 @@ export const MyMain = styled("main")(({ isDark }) => ({
  * @returns {Component} Main page
  */
 const Main = () => {
-  const isDark = useSelector((state) => state.darkThemeReducer.darkTheme);
+  const isDark = useSelector((state) => state?.darkThemeReducer?.darkTheme);
   return (
     <MyMain isDark={isDark}>
       <CardsContainer />

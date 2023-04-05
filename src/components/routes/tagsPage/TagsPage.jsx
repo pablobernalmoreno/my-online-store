@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import GameCard from "../../cards/GameCard";
 import { MySection } from "../../cards/CardsContainer";
 import { MyMain } from "../main/Main";
@@ -29,6 +29,8 @@ const TagsPage = () => {
 
   const gamesWithTag = useMemo(() => [], []);
 
+  const user = true;
+
   /**
    * Gets all games that have local tag
    * Stores it in a useCallback so it doesnt re render every time
@@ -46,6 +48,10 @@ const TagsPage = () => {
   );
 
   getGamesWithTag(gameTag);
+
+  if (!user) {
+    return <Navigate to="/error" />;
+  }
 
   return (
     <MyMain isDark={isDark}>
